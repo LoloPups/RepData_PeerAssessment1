@@ -28,12 +28,7 @@ names(stepsSums)<-c("date","steps")
 hist(stepsSums$steps, col="blue", xlab = "Steps", main="Total number of steps")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
-
-```r
-dev.copy(png, file = "figure//Plot1.png",width = 680, height = 480)
-dev.off()
-```
+![](figure/Plot1-1.png) 
 
 ## Calculating mean total number of steps taken per day?
 
@@ -46,7 +41,7 @@ print(mmtable, type = "html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Sun Jan 18 22:53:51 2015 -->
+<!-- Sun Jan 18 23:21:30 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> mean </th> <th> median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766.19 </td> <td align="right"> 10765 </td> </tr>
@@ -61,12 +56,7 @@ with(intervalsMeans,plot(x=interval,y=steps,type="l",xlab="Interval",
                          ,ylab="Steps", main="Daily activity"))
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
-
-```r
-dev.copy(png, file = "figure//Plot2.png",width = 680, height = 480)
-dev.off()
-```
+![](figure/Plot2-1.png) 
 
 ## Imputing missing values
 1. Printing number of rows with NA value in 'steps' column
@@ -102,12 +92,7 @@ names(stepsSums3)<-c("date","steps")
 hist(stepsSums3$steps, col="blue", xlab = "Steps", main="Total number of steps")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-10-1.png) 
-
-```r
-dev.copy(png, file = "figure//Plot3.png",width = 680, height = 480)
-dev.off()
-```
+![](figure/Plot3-1.png) 
 As is easy to see the count of days which total number of steps varies between 10000 and 15000 has increased.  
   
 5. Creating the table of new mean and new median.
@@ -119,7 +104,7 @@ print(mmtable, type = "html")
 ```
 
 <!-- html table generated in R 3.1.1 by xtable 1.7-4 package -->
-<!-- Sun Jan 18 22:53:51 2015 -->
+<!-- Sun Jan 18 23:21:30 2015 -->
 <table border=1>
 <tr> <th>  </th> <th> mean </th> <th> median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766.19 </td> <td align="right"> 10766.19 </td> </tr>
@@ -139,9 +124,4 @@ qplot(interval, steps, data=DT3, main="Daily activity", facets=daytype~.,
       stat="summary",fun.y="mean", geom="line")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
-
-```r
-dev.copy(png, file = "figure//Plot4.png", width = 680, height = 480)
-dev.off()
-```
+![](figure/Plot4-1.png) 

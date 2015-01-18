@@ -7,7 +7,7 @@ output:
 
 ```{r setoptions, echo=FALSE,warning = FALSE}
 library("knitr")
-opts_chunk$set(warning = FALSE)
+opts_chunk$set(fig.path='figure/', warning = FALSE)
 ```
 
 ## Loading and preprocessing the data  
@@ -26,12 +26,10 @@ DT2<-DT1[!is.na(DT1$steps),]
 ```
 
 ## Histogram of the total number of steps taken each day
-```{r, fig.height=4,results='hide'}
+```{r Plot1, fig.height=4,results='hide'}
 stepsSums<-aggregate(DT2$steps,by=list(DT2$date),FUN=sum)
 names(stepsSums)<-c("date","steps")
 hist(stepsSums$steps, col="blue", xlab = "Steps", main="Total number of steps")
-dev.copy(png, file = "figure//Plot1.png",width = 680, height = 480)
-dev.off()
 ```
 
 ## Calculating mean total number of steps taken per day?
@@ -44,13 +42,11 @@ print(mmtable, type = "html")
 ```
 
 ## The average daily activity pattern
-```{r, fig.height=4,results='hide'}
+```{r Plot2, fig.height=4,results='hide'}
 intervalsMeans<-with(DT2,aggregate(steps,by=list(interval),FUN=mean))
 names(intervalsMeans)<-c("interval","steps")
 with(intervalsMeans,plot(x=interval,y=steps,type="l",xlab="Interval",
                          ,ylab="Steps", main="Daily activity"))
-dev.copy(png, file = "figure//Plot2.png",width = 680, height = 480)
-dev.off()
 ```
 
 ## Imputing missing values
@@ -73,12 +69,10 @@ DT3[naIndices,"steps"]<-meansList[as.character(DT3[naIndices,]$interval)]
 ```
 
 4. Creating a hist and stats for new table...  
-```{r, fig.height=4, results='hide'}
+```{r Plot3, fig.height=4, results='hide'}
 stepsSums3<-aggregate(DT3$steps,by=list(DT3$date),FUN=sum)
 names(stepsSums3)<-c("date","steps")
 hist(stepsSums3$steps, col="blue", xlab = "Steps", main="Total number of steps")
-dev.copy(png, file = "figure//Plot3.png",width = 680, height = 480)
-dev.off()
 ```
 As is easy to see the count of days which total number of steps varies between 10000 and 15000 has increased.  
   
@@ -91,7 +85,7 @@ print(mmtable, type = "html")
 
 
 ## Creating a new factor variable indicating whether a given date is a weekday or weekend day.
-```{r, fig.height=4,results='hide'}
+```{r Plot4, fig.height=4,results='hide'}
 library(chron)
 library(ggplot2)
 DT3$date<-as.Date(DT3$date)
@@ -100,6 +94,4 @@ DT3$daytype[!is.weekend(DT3$date)]<-"weekday"
 DT3$daytype<-as.factor(DT3$daytype)
 qplot(interval, steps, data=DT3, main="Daily activity", facets=daytype~., 
       stat="summary",fun.y="mean", geom="line")
-dev.copy(png, file = "figure//Plot4.png", width = 680, height = 480)
-dev.off()
 ```
